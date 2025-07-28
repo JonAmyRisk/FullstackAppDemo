@@ -26,7 +26,7 @@ export class AppController {
 
   //gets a single account (Unused but seems sensible to add to backend for future use)
   @Get('accounts/:id')    
-  async getPostById(@Param('id') id: string): Promise<AccountModel> {
+  async getAccountById(@Param('id') id: string): Promise<AccountModel> {
     const post = await this.accountsService.account({ id: Number(id) });
     if (!post) throw new NotFoundException(`Post ${id} not found`);
     return post;

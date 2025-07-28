@@ -1,13 +1,11 @@
 import  { useEffect, useState} from 'react';
 import type { ReactNode } from 'react';
-import {
-  Box,
-  CircularProgress,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-} from '@mui/material';
+import Box from '@mui/material/Box'
+import CircularProgress from '@mui/material/CircularProgress'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import ListItemText from '@mui/material/ListItemText'
+import Typography from '@mui/material/Typography';
 
 interface Account {
   id: number;
@@ -19,10 +17,6 @@ interface Account {
 
 interface AccountsReadProps {
   refreshKey: number;
-  /**
-   * Optional render prop: if provided, use it to render each ListItem.
-   * Otherwise, render the default ListItemText.
-   */
   renderItem?: (acc: Account) => ReactNode;
 }
 
@@ -41,12 +35,17 @@ export default function AccountsRead({
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
       })
-      .then((data: Account[]) => setItems(data))
+      .then((data: Account[]) => {
+        // Sort alphabetically by name
+        const sorted = data.sort((a, b) => a.name.localeCompare(b.name));
+        setItems(sorted);
+      })
       .catch((err) => {
         console.error(err);
         setError('Failed to load accounts');
       })
       .finally(() => setLoading(false));
+      console.log("the data is: ", items)
   }, [refreshKey]);
 
   if (loading) {
@@ -79,12 +78,9 @@ export default function AccountsRead({
       p={2}
       sx={{ width: '100%' }}
     >
-      <Typography variant="h5" gutterBottom>
-        Account List
-      </Typography>
       <List sx={{ width: '100%', maxWidth: 600 }}>
         {items.map((acc) => (
-          // If renderItem is provided, use it; else use default ListItemText
+          
           <li key={acc.id}>
             {renderItem ? (
               renderItem(acc)

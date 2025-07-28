@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
-import {
-  Box,
-  CircularProgress,
-  Button,
-  Alert,
-  TextField,
-  Typography,
-} from '@mui/material';
+import Alert from '@mui/material/Alert'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import CircularProgress from '@mui/material/CircularProgress'
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+
 
 export interface AccountInput {
   id?: number;
@@ -28,6 +27,8 @@ export default function AccountsWrite({
 }: AccountsWriteProps) {
   // Decide if we’re editing or creating
   const isEdit = Boolean(initialData?.id);
+
+  const BASE_URL = `${import.meta.env.VITE_BASE_URL}`;
 
   // Initialize form from initialData or empty defaults
   const [form, setForm] = useState<AccountInput>({
@@ -82,8 +83,8 @@ export default function AccountsWrite({
     setLoading(true);
     try {
       const url = isEdit
-        ? `http://localhost:3000/accounts/${form.id}`
-        : 'http://localhost:3000/accounts';
+        ? `${BASE_URL}/accounts/${form.id}`
+        : `${BASE_URL}/accounts`;
       const method = isEdit ? 'PUT' : 'POST';
 
       const res = await fetch(url, {

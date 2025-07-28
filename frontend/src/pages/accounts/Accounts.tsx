@@ -1,20 +1,18 @@
 import React, { useState } from "react";
-import {
-  Box,
-  IconButton,
-  Button,
-  ListItem,
-  ListItemText,
-  Typography,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Slide,
-} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon   from '@mui/icons-material/Edit';
 import AddIcon    from '@mui/icons-material/Add';
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Dialog from '@mui/material/Dialog'
+import DialogTitle from '@mui/material/DialogTitle'
+import DialogContent from '@mui/material/DialogContent'
+import DialogActions from '@mui/material/DialogActions'
+import ListItem from '@mui/material/ListItem'
+import ListItemText from '@mui/material/ListItemText'
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Slide from "@mui/material/Slide";
 import type { TransitionProps } from '@mui/material/transitions';
 import AccountsRead from '../../components/AccountsRead';
 import AccountsWrite from '../../components/AccountsWrite';
@@ -35,6 +33,7 @@ const Transition = React.forwardRef<HTMLDivElement, TransitionProps>(
 );
 
 export default function Accounts() {
+  const BASE_URL = `${import.meta.env.VITE_BASE_URL}`;
   const [refreshKey, setRefreshKey] = useState(0);
   const [editingAccount, setEditingAccount] = useState<any>(null);
   const [writeOpen, setWriteOpen] = useState(false);
@@ -55,7 +54,7 @@ export default function Accounts() {
   const handleDelete = (id: number) => setDeleteConfirmId(id);
   const confirmDelete = async () => {
     if (deleteConfirmId == null) return;
-    await fetch(`http://localhost:3000/accounts/${deleteConfirmId}`, { method: 'DELETE' });
+    await fetch(`${BASE_URL}/accounts/${deleteConfirmId}`, { method: 'DELETE' });
     setDeleteConfirmId(null);
     handleAccountsChanged();
   };
