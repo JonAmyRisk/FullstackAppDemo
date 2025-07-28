@@ -45,7 +45,6 @@ export default function AccountsRead({
         setError('Failed to load accounts');
       })
       .finally(() => setLoading(false));
-      console.log("the data is: ", items)
   }, [refreshKey]);
 
   if (loading) {
@@ -74,7 +73,7 @@ export default function AccountsRead({
     <Box
       display="flex"
       flexDirection="column"
-      alignItems="center"
+      alignItems="left"
       p={2}
       sx={{ width: '100%' }}
     >
