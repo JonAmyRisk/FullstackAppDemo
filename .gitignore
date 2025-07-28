@@ -1,0 +1,10 @@
+# Node
+node_modules/
+# Prisma
+prisma/migrations/
+# Env
+**/.env
+# Vite
+dist/
+# VSCode
+.vscode/
