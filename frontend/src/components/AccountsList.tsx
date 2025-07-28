@@ -6,7 +6,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import Typography from '@mui/material/Typography';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
 import AccountsRead from './AccountsRead';
 
 export interface Account {
@@ -23,7 +22,6 @@ export interface AccountsListProps {
   onSelect: (acc: Account) => void;
   onNew: () => void;
   onEdit: (acc: Account) => void;
-  onDelete: (id: number) => void;
 }
 
 export default function AccountsList({
@@ -32,7 +30,6 @@ export default function AccountsList({
   onSelect,
   onNew,
   onEdit,
-  onDelete,
 }: AccountsListProps) {
   return (
     <Box sx={{ flex: 1, p: 2, borderRight: 1, borderColor: 'divider', overflowY: 'auto', width: '100%', maxWidth: 600, mx: 'auto' }}>
@@ -68,9 +65,6 @@ export default function AccountsList({
               />
               <IconButton edge="end" onClick={() => onEdit(acc)}>
                 <EditIcon />
-              </IconButton>
-              <IconButton edge="end" onClick={() => onDelete(acc.id)}>
-                <DeleteIcon />
               </IconButton>
             </ListItemButton>
           </ListItem>

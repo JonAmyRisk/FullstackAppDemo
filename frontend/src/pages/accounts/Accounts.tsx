@@ -3,20 +3,22 @@ import Box from '@mui/material/Box';
 import AccountsList from '../../components/AccountsList';
 import PaymentsPanel from '../../components/PaymentsPanel';
 import EditDialog from '../../components/Dialogs/EditDialog';
-import DeleteDialog from '../../components/Dialogs/DeleteDialog';
 
 export default function Accounts() {
   const BASE_URL = `${import.meta.env.VITE_BASE_URL}`;
   const [refreshKey, setRefreshKey] = useState(0);
   const [editingAccount, setEditingAccount] = useState<any>(null);
   const [writeOpen, setWriteOpen] = useState(false);
-  const [deleteConfirmId, setDeleteConfirmId] = useState<number | null>(null);
+  
   const [selectedAccount, setSelectedAccount] = useState<any>(null);
   const [payments, setPayments] = useState<any[]>([]);
 
   const handleAccountsChanged = () => setRefreshKey((k) => k + 1);
   const handleNew = () => { setEditingAccount(null); setWriteOpen(true); };
   const handleEdit = (account: any) => { setEditingAccount(account); setWriteOpen(true); };
+
+  /* Deletion is a core part of CRUD but not in requirements and question on what to do with linked payments
+  const [deleteConfirmId, setDeleteConfirmId] = useState<number | null>(null);
   const handleDelete = (id: number) => setDeleteConfirmId(id);
 
   const confirmDelete = async () => {
@@ -27,7 +29,8 @@ export default function Accounts() {
     if (selectedAccount?.id === deleteConfirmId) setSelectedAccount(null);
   };
   const cancelDelete = () => setDeleteConfirmId(null);
-
+  */
+ 
   const selectAccount = async (account: any) => {
     setSelectedAccount(account);
     const res = await fetch(`${BASE_URL}/accounts/${account.id}`);
@@ -43,7 +46,6 @@ export default function Accounts() {
         onSelect={selectAccount}
         onNew={handleNew}
         onEdit={handleEdit}
-        onDelete={handleDelete}
       />
       {selectedAccount && <PaymentsPanel  
         accountName={selectedAccount?.name ?? ''}
@@ -59,14 +61,14 @@ export default function Accounts() {
           handleAccountsChanged();
         }}
       />
-      {/* Delete Confirmation Dialog */}
+      {/* Deletion is a core part of CRUD but not in requirements and question on what to do with linked payments
       <DeleteDialog
         open={deleteConfirmId != null}
         title="Confirm Account Deletion"
         message={`Are you sure you want to delete account #${deleteConfirmId}?`}
         onCancel={cancelDelete}
         onConfirm={confirmDelete}
-      />
+      />*/}
     </Box>
   );
 }

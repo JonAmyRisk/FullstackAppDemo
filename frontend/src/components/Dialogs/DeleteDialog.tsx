@@ -1,4 +1,3 @@
-// src/pages/DeleteConfirmDialog.tsx
 import React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -8,6 +7,8 @@ import DialogActions from '@mui/material/DialogActions';
 import Slide from '@mui/material/Slide';
 import Typography from '@mui/material/Typography';
 import type { TransitionProps } from '@mui/material/transitions';
+
+//This component is not being used currently as not in requirements but is a key part of CRUD so kept here for example//
 
 const Transition = React.forwardRef<HTMLDivElement, TransitionProps>(function Transition(props, ref) {
   const { children, ...rest } = props;
