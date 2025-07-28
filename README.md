@@ -1,6 +1,6 @@
 # My Full‑Stack Demo
 
-_A brief one‑liner about what this project is._
+This is a simple demonstration of a full stack application DB, API and React Frontend.
 
 ## Features
 
