@@ -3,7 +3,6 @@ import { Routes, Route, Link } from 'react-router-dom';
 import { Box, Button, Typography, useMediaQuery, CssBaseline } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Home } from './pages/Home';
-import { About } from './pages/About';
 import Accounts from './pages/accounts/Accounts';
 import Payments from './pages/payments/Payments';
 
@@ -57,9 +56,6 @@ export default function App() {
         <Button component={Link} to="/" variant="outlined">
           Home
         </Button>
-        <Button component={Link} to="/about" variant="outlined">
-          About
-        </Button>
         <Button component={Link} to="/accounts" variant="outlined">
           Accounts
         </Button>
@@ -89,7 +85,6 @@ export default function App() {
         >
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
             <Route path="/accounts" element={<Accounts />} />
             <Route path="/payments" element={<Payments />} />
             <Route path="*" element={<Typography>Page Not Found</Typography>} />

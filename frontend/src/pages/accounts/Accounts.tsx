@@ -3,9 +3,9 @@ import Box from '@mui/material/Box';
 import AccountsList from '../../components/Accounts/AccountsList';
 import PaymentsPanel from '../../components/Accounts/PaymentsPanel';
 import EditDialog from '../../components/Accounts/Dialogs/EditDialog';
+import { BASE_URL } from '../../utils/constants'
 
 export default function Accounts() {
-  const BASE_URL = `${import.meta.env.VITE_BASE_URL}`;
   const [refreshKey, setRefreshKey] = useState(0);
   const [editingAccount, setEditingAccount] = useState<any>(null);
   const [writeOpen, setWriteOpen] = useState(false);

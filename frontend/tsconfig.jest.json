@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "module": "nodenext",
+    "target": "es2020",
+    "jsx": "react-jsx",                 // ← enable JSX
+    "esModuleInterop": true,
+    "allowJs": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["node_modules/*", "src/*"]
+    },
+    "types": [
+      "jest",                           // ← core jest types
+      "@testing-library/jest-dom",      // ← jest-dom matchers
+      "node"                            // ← for global.d.ts or node built‑ins
+    ]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    "src/**/*.d.ts"                    // ← pick up your global.d.ts / vite-env.d.ts
+  ]
+}

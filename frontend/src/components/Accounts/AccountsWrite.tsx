@@ -8,6 +8,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { BASE_URL } from '../../utils/constants';
 
 export interface AccountInput {
   name: string;
@@ -41,7 +42,6 @@ export default function AccountsWrite({
   onSuccess,
 }: AccountsWriteProps) {
   const isEdit = Boolean(accountId);
-  const BASE_URL = import.meta.env.VITE_BASE_URL!;
 
   const handleSubmit = async (
     values: AccountInput,

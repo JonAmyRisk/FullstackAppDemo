@@ -12,6 +12,7 @@ import {
   InputLabel,
   FormControl
 } from '@mui/material';
+import { BASE_URL } from '../../utils/constants'
 
 export interface PaymentInput {
   id: number;
@@ -70,7 +71,6 @@ export default function PaymentsWrite({
   onError,
 }: PaymentsWriteProps) {
   const isEdit = Boolean(paymentId);
-  const BASE_URL = import.meta.env.VITE_BASE_URL!;
   
   const [accounts, setAccounts] = useState<Account[]>([]);
     useEffect(() => {
