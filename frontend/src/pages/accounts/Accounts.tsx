@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Box from '@mui/material/Box';
-import AccountsList from '../../components/AccountsList';
-import PaymentsPanel from '../../components/PaymentsPanel';
-import EditDialog from '../../components/Dialogs/EditDialog';
+import AccountsList from '../../components/Accounts/AccountsList';
+import PaymentsPanel from '../../components/Accounts/PaymentsPanel';
+import EditDialog from '../../components/Accounts/Dialogs/EditDialog';
 
 export default function Accounts() {
   const BASE_URL = `${import.meta.env.VITE_BASE_URL}`;
@@ -54,6 +54,7 @@ export default function Accounts() {
       />}
       <EditDialog
         open={writeOpen}
+        accountId={editingAccount?.id}
         initialData={editingAccount}
         onClose={() => setWriteOpen(false)}
         onSuccess={() => {

@@ -12,7 +12,7 @@ interface Account {
   name: string;
   address: string;
   phoneNumber: string;
-  bankAccountNumber?: number;
+  bankAccountNumber?: number | null;
 }
 
 interface AccountsReadProps {

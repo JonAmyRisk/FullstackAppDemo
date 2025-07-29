@@ -56,6 +56,9 @@ export default function App() {
         <Button component={Link} to="/accounts" variant="outlined">
           Accounts
         </Button>
+        <Button component={Link} to="/payments" variant="outlined">
+          Payments
+        </Button>
       </Box>
 
       {/* Page content area */}
@@ -81,6 +84,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/accounts" element={<Accounts />} />
+            <Route path="/payments" element={<Accounts />} />
             <Route path="*" element={<Typography>Page Not Found</Typography>} />
           </Routes>
         </Box>

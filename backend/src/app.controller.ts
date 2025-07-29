@@ -39,7 +39,7 @@ export class AppController {
       name: string,
       address: string,
       phoneNumber: string,
-      bankAccountNumber?: number,
+      bankAccountNumber?: number | null,
      },
   ): Promise<AccountModel> {
     return this.accountsService.createAccount(accountData);
@@ -53,7 +53,7 @@ export class AppController {
       name?: string;
       address?: string;
       phoneNumber?: string;
-      bankAccountNumber?: number;
+      bankAccountNumber?: number | null;
     }
   ): Promise<AccountModel> {
     const updated = await this.accountsService.updateAccount({

@@ -6,8 +6,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Slide from '@mui/material/Slide';
 import type { TransitionProps } from '@mui/material/transitions';
-import AccountsWrite from '../../components/AccountsWrite';
-import type { AccountInput } from '../../components/AccountsWrite';
+import PaymentsWrite from './PaymentsWrite';
+import type { PaymentInput } from './PaymentsWrite';
 
 const Transition = React.forwardRef<
   HTMLDivElement,
@@ -21,9 +21,9 @@ const Transition = React.forwardRef<
   );
 });
 
-interface AccountEditorDialogProps {
+interface EditorDialogProps {
   open: boolean;
-  initialData?: AccountInput;
+  initialData?: PaymentInput;
   onClose: () => void;
   onSuccess: () => void;
 }
@@ -33,7 +33,7 @@ export default function EditDialog({
   initialData,
   onClose,
   onSuccess,
-}: AccountEditorDialogProps) {
+}: EditorDialogProps) {
   const isEdit = Boolean(initialData && initialData.id);
 
   return (
@@ -46,9 +46,9 @@ export default function EditDialog({
         transition: Transition
       }}
     >
-      <DialogTitle>{isEdit ? 'Edit Account' : 'New Account'}</DialogTitle>
+      <DialogTitle>{isEdit ? 'Update Payment' : 'New Payment'}</DialogTitle>
       <DialogContent>
-        <AccountsWrite
+        <PaymentsWrite
           initialData={initialData}
           onSuccess={() => {
             onSuccess();
