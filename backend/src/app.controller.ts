@@ -29,11 +29,15 @@ export class AppController {
   //gets a single account (Unused but seems sensible to add to backend for future use)
   @Get('accounts/:id')
   async getAccountById(@Param('id') id: string) {
-    return this.accountsService.account({
+  const account = await this.accountsService.account({
       where: { id: Number(id) },
       include: { payments: true },
     });
-}
+    if (!account) {
+      throw new NotFoundException(`Account ${id} not found`);
+    }
+    return account
+  }
 
   //creates a new account
   @Post('accounts')
