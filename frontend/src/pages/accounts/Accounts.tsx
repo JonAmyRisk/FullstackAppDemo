@@ -16,21 +16,7 @@ export default function Accounts() {
   const handleAccountsChanged = () => setRefreshKey((k) => k + 1);
   const handleNew = () => { setEditingAccount(null); setWriteOpen(true); };
   const handleEdit = (account: any) => { setEditingAccount(account); setWriteOpen(true); };
-
-  /* Deletion is a core part of CRUD but not in requirements and question on what to do with linked payments
-  const [deleteConfirmId, setDeleteConfirmId] = useState<number | null>(null);
-  const handleDelete = (id: number) => setDeleteConfirmId(id);
-
-  const confirmDelete = async () => {
-    if (deleteConfirmId == null) return;
-    await fetch(`${BASE_URL}/accounts/${deleteConfirmId}`, { method: 'DELETE' });
-    setDeleteConfirmId(null);
-    handleAccountsChanged();
-    if (selectedAccount?.id === deleteConfirmId) setSelectedAccount(null);
-  };
-  const cancelDelete = () => setDeleteConfirmId(null);
-  */
- 
+  
   const selectAccount = async (account: any) => {
     setSelectedAccount(account);
     const res = await fetch(`${BASE_URL}/accounts/${account.id}`);

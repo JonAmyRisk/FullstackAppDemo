@@ -35,7 +35,10 @@ export default function AccountsList({
     <Box sx={{ flex: 1, p: 2, borderRight: 1, borderColor: 'divider', overflowY: 'auto', width: '100%', maxWidth: 600, mx: 'auto' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'left', mb: 2 }}>
         <Typography variant="h5">Accounts</Typography>
-        <IconButton color="primary" onClick={onNew}>
+        <IconButton 
+          color="primary" 
+          onClick={onNew}
+          aria-label="Add account">
           <AddIcon />
         </IconButton>
       </Box>
@@ -63,7 +66,9 @@ export default function AccountsList({
                   .filter(Boolean)
                   .join(' • ')}
               />
-              <IconButton edge="end" onClick={() => onEdit(acc)}>
+              <IconButton 
+                edge="end" 
+                onClick={() => onEdit(acc)}>
                 <EditIcon />
               </IconButton>
             </ListItemButton>

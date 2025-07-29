@@ -39,7 +39,8 @@ export default function PaymentsPanel({ accountName, currencySymbol, payments, o
             <Typography variant="h6" gutterBottom>
                 Payments for {accountName}
             </Typography>   
-            <IconButton size="small" onClick={onClose}>
+            <IconButton size="small" onClick={onClose}
+                aria-label="Close payments panel">  
                 <CloseIcon />
             </IconButton>            
         </Box>  
@@ -59,7 +60,8 @@ export default function PaymentsPanel({ accountName, currencySymbol, payments, o
             <Typography color="text.secondary">
                 No payments found for <strong>{accountName}</strong>.
             </Typography>   
-            <IconButton size="small" onClick={onClose}>
+            <IconButton size="small" onClick={onClose}
+                aria-label="Close payments panel">  
                 <CloseIcon />
             </IconButton>
         </Box>       
