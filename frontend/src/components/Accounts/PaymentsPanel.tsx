@@ -16,12 +16,13 @@ export interface Payment {
 }
 
 export interface PaymentsPanelProps {
+  currencySymbol: string;
   accountName: string;
   payments: Payment[];
   onClose: () => void;
 }
 
-export default function PaymentsPanel({ accountName, payments, onClose }: PaymentsPanelProps) {
+export default function PaymentsPanel({ accountName, currencySymbol, payments, onClose }: PaymentsPanelProps) {
   return (
     <Box
       sx={{
@@ -46,7 +47,7 @@ export default function PaymentsPanel({ accountName, payments, onClose }: Paymen
             {payments.map((p) => (
               <ListItem key={p.id} sx={{ mb: 1, borderRadius: 1, boxShadow: 1 }}>
                 <ListItemText
-                  primary={`$${p.amount.toFixed(2)} to ${p.recipientName}`}
+                  primary={`${currencySymbol}${p.amount.toFixed(2)} to ${p.recipientName}`}
                   secondary={`Status: ${PAYMENT_STATUS[p.status]}${p.notes ? ` | ${p.notes}` : ''}`}
                 />
               </ListItem>

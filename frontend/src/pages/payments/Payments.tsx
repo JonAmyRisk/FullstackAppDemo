@@ -11,8 +11,6 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props,
 
 
 export default function Payments() {
-  const BASE_URL = `${import.meta.env.VITE_BASE_URL}`;
-
   //Should come from locale object//
   const currencySymbol = '£'
 
@@ -20,7 +18,6 @@ export default function Payments() {
   const [writeOpen, setWriteOpen] = useState(false);
   
   const [selectedPayment, setSelectedPayment] = useState<any>(null);
-  const [payments, setPayments] = useState<any[]>([]);
   
   const [snack, setSnack] = useState<{
     open: boolean;
@@ -41,9 +38,6 @@ export default function Payments() {
  
   const selectPayment = async (payment: any) => {
     setSelectedPayment(payment);
-    const res = await fetch(`${BASE_URL}/payments/${payment.id}`);
-    const data = await res.json();
-    setPayments(data.payments || []);
   };
 
   return (

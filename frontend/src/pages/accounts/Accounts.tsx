@@ -47,7 +47,8 @@ export default function Accounts() {
         onNew={handleNew}
         onEdit={handleEdit}
       />
-      {selectedAccount && <PaymentsPanel  
+      {selectedAccount && <PaymentsPanel
+        currencySymbol='£'  
         accountName={selectedAccount?.name ?? ''}
         payments={payments}
         onClose={() => setSelectedAccount(null)}
