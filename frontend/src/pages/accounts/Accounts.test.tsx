@@ -36,18 +36,7 @@ jest.mock('../../utils/constants', () => ({
 
 describe('<Accounts />', () => {
   beforeEach(() => {
-    jest.resetAllMocks();
-    // mock fetch to return a fake account with payments
-    global.fetch = jest.fn((url) =>
-      Promise.resolve({
-        ok: true,
-        json: () =>
-          Promise.resolve({
-            payments: [{ id: 1, amount: 10, recipientName: 'X', status: 1 }],
-            name: 'Acct 1',
-          }),
-      } as any)
-    );
+    jest.resetAllMocks();    
   });
 
   it('opens edit dialog when "New Account" is clicked', () => {
