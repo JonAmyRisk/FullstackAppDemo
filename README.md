@@ -7,12 +7,13 @@ This is a simple demonstration of a full stack application DB, API and React Fro
 - NestJS + Prisma backend with PostgreSQL  
 - React + MUI + React Router frontend  
 - Light/dark theme switch based on OS preference  
-- CRUD on Accounts & Payments  
+- CRU on Accounts & Payments  
 - “One‑command” launch via Docker Compose  
 
 # Prerequisites
 
-- Docker & Docker Compose  (or Node 22+ & PostgreSQL locally)  
+- Docker & Docker Compose  (or Node 22+ & PostgreSQL locally)
+- Windows Subsystem for Linux (needed for Docker) can be obtained here https://learn.microsoft.com/en-us/windows/wsl/install
 - (Optional) Git for cloning  
 
 # Quickstart
