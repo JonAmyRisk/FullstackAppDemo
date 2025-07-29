@@ -8,14 +8,13 @@ import Accounts from './pages/accounts/Accounts';
 
 export default function App() {  
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
- 
   const theme = useMemo(
     () =>
       createTheme({
         palette: {
           mode: prefersDarkMode ? 'dark' : 'light',
           primary: {
-            main: prefersDarkMode ? '#90caf9' : '#1976d2',
+            main: prefersDarkMode ? '#bbfc00' : '#bbfc00',
           },
           secondary: {
             main: prefersDarkMode ? '#f48fb1' : '#dc004e',
@@ -25,13 +24,20 @@ export default function App() {
             paper: prefersDarkMode ? '#1e1e1e' : '#ffffff',
           },
         },
+      typography: {
+          fontFamily: ['"Inter"', '"Roboto"', 'sans-serif'].join(','),
+          h1: { fontWeight: 700, fontSize: '2.5rem', lineHeight: 1.2 },
+          h2: { fontWeight: 600, fontSize: '2rem',   lineHeight: 1.3 },
+          body1: { fontSize: '1rem', lineHeight: 1.6 },
+          button: { textTransform: 'none', fontWeight: 600 },
+        },
       }),
     [prefersDarkMode]
   );
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline>
+      <CssBaseline/>
     <Box sx={{ display: 'flex', height: '100vh' }}>
       {/* Sidebar navigation */}
       <Box
@@ -90,7 +96,6 @@ export default function App() {
         </Box>
       </Box>
     </Box>
-      </CssBaseline>
     </ThemeProvider>
   );
 }
