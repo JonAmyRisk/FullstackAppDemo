@@ -20,7 +20,7 @@ export interface PaymentInput {
   amount: number;
   recipientName: string;
   recipientBank: string;
-  recipientBAN: number;
+  recipientBAN: string;
   status: number;
   notes: string;
   createdAt: Date;
@@ -31,7 +31,7 @@ export interface PaymentFormValues {
   amount: number;          // float
   recipientName: string;
   recipientBank: string;
-  recipientBAN: number;
+  recipientBAN: string;
   status: number;          // 1,2,3 (converted from string status dropdown)
   notes: string;
 }
@@ -41,7 +41,7 @@ interface Account {
   name: string;
   address: string;
   phoneNumber: string;
-  bankAccountNumber?: number | null;
+  bankAccountNumber?: string | null;
 }
 
 interface PaymentsWriteProps {
@@ -49,6 +49,7 @@ interface PaymentsWriteProps {
   paymentId?: number;
   initialData?: PaymentInput;
   onSuccess?: () => void;
+  onError?: (msg: string) => void;
 }
 
 const schema = Yup.object({
@@ -66,6 +67,7 @@ export default function PaymentsWrite({
   paymentId,
   initialData,
   onSuccess,
+  onError,
 }: PaymentsWriteProps) {
   const isEdit = Boolean(paymentId);
   const BASE_URL = import.meta.env.VITE_BASE_URL!;
@@ -93,7 +95,7 @@ export default function PaymentsWrite({
         amount: 0,
         recipientName: '',
         recipientBank: '',
-        recipientBAN: 0,
+        recipientBAN: '',
         status: 1,
         notes: '',
       };
@@ -131,6 +133,8 @@ export default function PaymentsWrite({
     } catch (error) {
       console.error(error);
       setStatus({ error: `Failed to ${isEdit ? 'update' : 'register'} payment` });
+      const msg = isEdit ? 'Failed to update payment' : 'Failed to create payment';
+      onError?.(msg);
     } finally {
       setSubmitting(false);
     }
@@ -191,7 +195,6 @@ export default function PaymentsWrite({
           />
           <TextField
             label="Recipient BAN"
-            type="number"
             fullWidth margin="normal"
             {...getFieldProps('recipientBAN')}
             error={touched.recipientBAN && !!errors.recipientBAN}

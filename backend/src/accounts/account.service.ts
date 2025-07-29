@@ -1,17 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { Account, Prisma } from '@prisma/client';
+import { Account, Payment, Prisma } from '@prisma/client';
 
 @Injectable()
 export class AccountsService {
   constructor(private prisma: PrismaService) {}
 
-  async account(
-    userWhereUniqueInput: Prisma.AccountWhereUniqueInput,
-  ): Promise<Account | null> {
-    return this.prisma.account.findUnique({
-      where: userWhereUniqueInput,
+  async account(params: {
+    where: Prisma.AccountWhereUniqueInput;
+    include?: { payments: boolean };
+  }): Promise<Account & { payments: Payment[] }> {
+    const result = await this.prisma.account.findUnique({
+      ...params,
+      include: { payments: true },
     });
+    if (!result) {
+     throw new Error(`Account not found`);
+    }
+    return result;
   }
 
   async accounts(params: {

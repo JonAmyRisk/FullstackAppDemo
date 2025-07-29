@@ -41,7 +41,7 @@ export class PaymentsService {
   amount: number;
   recipientName: string;
   recipientBank: string;
-  recipientBAN: number;
+  recipientBAN: string;
   status: number;
   notes?: string;
   }): Promise<Payment> {

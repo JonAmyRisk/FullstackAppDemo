@@ -18,7 +18,7 @@ model Account {
   name               String
   address            String
   phoneNumber        String
-  bankAccountNumber  Int?      
+  bankAccountNumber  String?  
   payments           Payment[] // one‑to‑many relation
 }
 
@@ -29,7 +29,7 @@ model Payment {
   amount           Float
   recipientName    String
   recipientBank    String
-  recipientBAN     Int
+  recipientBAN     String
   status           Int
   notes            String?
   createdAt        DateTime @default(now())

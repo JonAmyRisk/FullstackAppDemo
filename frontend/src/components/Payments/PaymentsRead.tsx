@@ -15,7 +15,7 @@ export interface Payment {
   amount: number;
   recipientName: string;
   recipientBank: string;
-  recipientBAN: number;
+  recipientBAN: string;
   status: number;
   notes: string;
   createdAt: Date;
@@ -102,7 +102,7 @@ export default function PaymentsRead({
               >
               <ListItemText
                 primary={`${currencySymbol} ${p.amount} paid to: ${p.recipientName} : ${PAYMENT_STATUS[p.status]}`}
-                secondary={`From ${p.account?.name} on ${new Date(p.createdAt).toLocaleDateString()}`}
+                secondary={`From ${p.account?.name} on ${new Date(p.createdAt).toLocaleString()}`}
               />
               </ListItem>
             )}

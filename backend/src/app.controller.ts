@@ -5,9 +5,7 @@ import {
   Post,
   Body,
   Put,
-  Delete,
   NotFoundException,
-  HttpCode,
 } from '@nestjs/common';
 import { AccountsService } from './accounts/account.service';
 import { Account as AccountModel } from '@prisma/client';
@@ -29,12 +27,13 @@ export class AppController {
   }
 
   //gets a single account (Unused but seems sensible to add to backend for future use)
-  @Get('accounts/:id')    
-  async getAccountById(@Param('id') id: string): Promise<AccountModel> {
-    const post = await this.accountsService.account({ id: Number(id) });
-    if (!post) throw new NotFoundException(`Post ${id} not found`);
-    return post;
-  }
+  @Get('accounts/:id')
+  async getAccountById(@Param('id') id: string) {
+    return this.accountsService.account({
+      where: { id: Number(id) },
+      include: { payments: true },
+    });
+}
 
   //creates a new account
   @Post('accounts')
@@ -43,7 +42,7 @@ export class AppController {
       name: string,
       address: string,
       phoneNumber: string,
-      bankAccountNumber?: number | null,
+      bankAccountNumber?: string,
      },
   ): Promise<AccountModel> {
     return this.accountsService.createAccount(accountData);
@@ -57,7 +56,7 @@ export class AppController {
       name?: string;
       address?: string;
       phoneNumber?: string;
-      bankAccountNumber?: number | null;
+      bankAccountNumber?: string;
     }
   ): Promise<AccountModel> {
     const updated = await this.accountsService.updateAccount({
@@ -70,7 +69,7 @@ export class AppController {
     return updated;
   }
 
-  //Deletes an account, although this wont work out of the box due to Payments relation, added as a stub for CRUD
+  /*Deletes an account, although this wont work out of the box due to Payments relation, added as a stub for CRUD
   //Would need refined requirements for what to do with orphaned payments
   @Delete('accounts/:id')
   @HttpCode(204)
@@ -81,6 +80,7 @@ export class AppController {
     }
     await this.accountsService.deleteAccount({id: Number(id)});
   }
+  */
 
   //gets a list of all payments
   @Get('payments')
@@ -104,7 +104,7 @@ export class AppController {
       amount: number;
       recipientName: string;
       recipientBank: string;
-      recipientBAN: number;
+      recipientBAN: string;
       status: number;
       notes?: string;
     },
@@ -120,7 +120,7 @@ export class AppController {
       amount: number;
       recipientName: string;
       recipientBank: string;
-      recipientBAN: number;
+      recipientBAN: string;
       status: number;
       notes?: string;
     }

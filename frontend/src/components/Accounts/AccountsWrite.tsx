@@ -13,7 +13,7 @@ export interface AccountInput {
   name: string;
   address: string;
   phoneNumber: string;
-  bankAccountNumber: number | undefined;
+  bankAccountNumber: string | undefined;
 }
 
 interface AccountsWriteProps {
@@ -139,7 +139,6 @@ export default function AccountsWrite({
             {/** Bank Account Number */}
             <TextField
               label="Bank Account No."
-              type="number"
               fullWidth
               sx={{ mb: 2 }}
               {...getFieldProps('bankAccountNumber')}

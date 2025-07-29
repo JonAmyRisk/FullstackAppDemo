@@ -28,6 +28,7 @@ interface EditorDialogProps {
   initialData?: PaymentInput;
   onClose: () => void;
   onSuccess: () => void;
+  onError?: (msg: string) => void;
 }
 
 export default function EditDialog({
@@ -37,6 +38,7 @@ export default function EditDialog({
   initialData,
   onClose,
   onSuccess,
+  onError,
 }: EditorDialogProps) {
   const isEdit = Boolean(initialData && initialData.id);
 
@@ -56,6 +58,7 @@ export default function EditDialog({
           currencySymbol={currencySymbol}
           paymentId={paymentId}
           initialData={initialData}
+          onError={onError}
           onSuccess={() => {
             onSuccess();
             onClose();

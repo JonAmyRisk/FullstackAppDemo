@@ -5,6 +5,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
+import { PAYMENT_STATUS } from '../../utils/status';
 
 export interface Payment {
   id: number;
@@ -46,7 +47,7 @@ export default function PaymentsPanel({ accountName, payments, onClose }: Paymen
               <ListItem key={p.id} sx={{ mb: 1, borderRadius: 1, boxShadow: 1 }}>
                 <ListItemText
                   primary={`$${p.amount.toFixed(2)} to ${p.recipientName}`}
-                  secondary={`Status: ${p.status}${p.notes ? ` | ${p.notes}` : ''}`}
+                  secondary={`Status: ${PAYMENT_STATUS[p.status]}${p.notes ? ` | ${p.notes}` : ''}`}
                 />
               </ListItem>
             ))}
