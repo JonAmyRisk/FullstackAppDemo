@@ -6,8 +6,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Slide from '@mui/material/Slide';
 import type { TransitionProps } from '@mui/material/transitions';
-import PaymentsWrite from './PaymentsWrite';
-import type { PaymentInput } from './PaymentsWrite';
+import PaymentsWrite from '../PaymentsWrite';
+import type { PaymentInput } from '../PaymentsWrite';
 
 const Transition = React.forwardRef<
   HTMLDivElement,
@@ -22,14 +22,18 @@ const Transition = React.forwardRef<
 });
 
 interface EditorDialogProps {
+  currencySymbol: string,
   open: boolean;
+  paymentId?: number;
   initialData?: PaymentInput;
   onClose: () => void;
   onSuccess: () => void;
 }
 
 export default function EditDialog({
+  currencySymbol,
   open,
+  paymentId,
   initialData,
   onClose,
   onSuccess,
@@ -49,6 +53,8 @@ export default function EditDialog({
       <DialogTitle>{isEdit ? 'Update Payment' : 'New Payment'}</DialogTitle>
       <DialogContent>
         <PaymentsWrite
+          currencySymbol={currencySymbol}
+          paymentId={paymentId}
           initialData={initialData}
           onSuccess={() => {
             onSuccess();

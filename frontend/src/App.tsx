@@ -5,6 +5,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Home } from './pages/Home';
 import { About } from './pages/About';
 import Accounts from './pages/accounts/Accounts';
+import Payments from './pages/payments/Payments';
 
 export default function App() {  
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -90,7 +91,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/accounts" element={<Accounts />} />
-            <Route path="/payments" element={<Accounts />} />
+            <Route path="/payments" element={<Payments />} />
             <Route path="*" element={<Typography>Page Not Found</Typography>} />
           </Routes>
         </Box>
