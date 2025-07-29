@@ -1,4 +1,4 @@
-import  { useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import type { ReactNode } from 'react';
 import Box from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress'
@@ -87,11 +87,11 @@ export default function PaymentsRead({
     >
       <List sx={{ width: '100%', maxWidth: 600 }}>
         {items.map((p) => (
-          
-          <li key={p.id}>
-            {renderItem ? (
-              renderItem(p)
-            ) : (
+                    renderItem ? (              
+                    <React.Fragment key={p.id}>
+                      {renderItem(p)}
+                    </React.Fragment>
+                    ) : (
               <ListItem
                 sx={{
                   mb: 1,
@@ -105,8 +105,7 @@ export default function PaymentsRead({
                 secondary={`From ${p.account?.name} on ${new Date(p.createdAt).toLocaleString()}`}
               />
               </ListItem>
-            )}
-          </li>
+            )
         ))}
       </List>
     </Box>

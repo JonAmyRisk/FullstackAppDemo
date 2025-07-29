@@ -1,4 +1,4 @@
-import  { useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import type { ReactNode } from 'react';
 import Box from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress'
@@ -79,10 +79,10 @@ export default function AccountsRead({
     >
       <List sx={{ width: '100%', maxWidth: 600 }}>
         {items.map((acc) => (
-          
-          <li key={acc.id}>
-            {renderItem ? (
-              renderItem(acc)
+            renderItem ? (              
+            <React.Fragment key={acc.id}>
+              {renderItem(acc)}
+            </React.Fragment>
             ) : (
               <ListItem
                 sx={{
@@ -103,8 +103,7 @@ export default function AccountsRead({
                     .join(' • ')}
                 />
               </ListItem>
-            )}
-          </li>
+            )
         ))}
       </List>
     </Box>

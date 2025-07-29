@@ -63,7 +63,7 @@ export default function PaymentsList({
               }}
             >
               <ListItemText
-                primary={`${currencySymbol} ${p.amount} paid to: ${p.recipientName} : ${PAYMENT_STATUS[p.status]}`}
+                primary={`${currencySymbol} ${p.amount} paid to: ${p.recipientName} (${PAYMENT_STATUS[p.status]})`}
                 secondary={`From ${p.account?.name} on ${new Date(p.createdAt).toLocaleString()}`}
               />
               <IconButton edge="end" onClick={() => onEdit(p)}>

@@ -15,14 +15,14 @@ export default function App() {
         palette: {
           mode: prefersDarkMode ? 'dark' : 'light',
           primary: {
-            main: prefersDarkMode ? '#bbfc00' : '#7fa802ff',
+            main: prefersDarkMode ? '#bbfc00' : '#121800ff',
           },
           secondary: {
-            main: prefersDarkMode ? '#f48fb1' : '#dc004e',
+            main: prefersDarkMode ? '#f48fb1' : '#bbfc00',
           },
           background: {
-            default: prefersDarkMode ? '#121212' : '#b6b6b6ff',
-            paper: prefersDarkMode ? '#1e1e1e' : '#f0f0f0ff',
+            default: prefersDarkMode ? '#121212' : '#1a1a1a',
+            paper: prefersDarkMode ? '#1e1e1e' : '#D4DAD9',
           },
         },
       typography: {
