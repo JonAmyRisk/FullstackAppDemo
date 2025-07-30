@@ -2,7 +2,6 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import AccountsList, { type Account } from './AccountsList';
 
-// 1) Mock AccountsRead so it just inlines renderItem results (no extra <li>)
 jest.mock('./AccountsRead', () => {
   return function DummyAccountsRead({
     renderItem,
@@ -45,7 +44,6 @@ describe('<AccountsList />', () => {
 
     expect(screen.getByText('Accounts')).toBeInTheDocument();
 
-    // Note: we added aria-label="Add account" to the IconButton in AccountsList
     const addBtn = screen.getByLabelText('Add account');
     fireEvent.click(addBtn);
     expect(onNew).toHaveBeenCalled();
@@ -62,13 +60,10 @@ describe('<AccountsList />', () => {
       />
     );
 
-    // "Alice" button
     const aliceBtn = screen.getByRole('button', { name: 'Alice A St • 111 • Bank Acc: 123' });
     fireEvent.click(aliceBtn);
     expect(onSelect).toHaveBeenCalledWith(expect.objectContaining({ "address": "A St", "bankAccountNumber": "123", "id": 1, "name": "Alice", "phoneNumber": "111" }));
 
-    // "Bob" edit icon button
-    // We gave that IconButton no label, but its child SVG has data-testid="EditIcon"
     const bobEditBtn = screen.getAllByTestId('EditIcon')
       .map((icon) => icon.closest('button') as HTMLElement)
       .find((btn) =>
@@ -89,7 +84,6 @@ describe('<AccountsList />', () => {
       />
     );
 
-    // The button whose accessible name is "Bob" should have Mui-selected
     const bobBtn = screen.getByRole('button', { name: 'Bob B Rd • 222' });
     expect(bobBtn.className).toMatch(/Mui-selected/);
   });

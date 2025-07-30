@@ -10,7 +10,6 @@ describe('AccountsService', () => {
   };
 
   beforeEach(async () => {
-    // Mock PrismaService.account methods
     prisma = {
       account: {
         findUnique: jest.fn(),

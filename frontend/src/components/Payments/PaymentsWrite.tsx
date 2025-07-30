@@ -28,12 +28,12 @@ export interface PaymentInput {
 }
 
 export interface PaymentFormValues {
-  accountId: number;     // selected from dropdown
-  amount: number;          // float
+  accountId: number;
+  amount: number;
   recipientName: string;
   recipientBank: string;
   recipientBAN: string;
-  status: number;          // 1,2,3 (converted from string status dropdown)
+  status: number;
   notes: string;
 }
 
@@ -149,7 +149,6 @@ export default function PaymentsWrite({
     >
       {({ isSubmitting, errors, touched, getFieldProps }) => (
          <Form>
-          {/* Account dropdown */}
           <FormControl fullWidth margin="normal">
             <InputLabel id="account-label">Account</InputLabel>
             <Select
@@ -164,7 +163,6 @@ export default function PaymentsWrite({
             </Select>
           </FormControl>
 
-          {/* Amount with currency adornment */}
           <TextField
             label="Amount"
             fullWidth
@@ -178,7 +176,6 @@ export default function PaymentsWrite({
             helperText={touched.amount && errors.amount}
           />
 
-          {/* Recipient Details (Name/Bank/BAN) */}
           <TextField
             label="Recipient Name"
             fullWidth margin="normal"
@@ -200,7 +197,6 @@ export default function PaymentsWrite({
             error={touched.recipientBAN && !!errors.recipientBAN}
             helperText={touched.recipientBAN && errors.recipientBAN}
           />
-          {/* Status dropdown */}
           <FormControl fullWidth margin="normal">
             <InputLabel id="status-label">Status</InputLabel>
             <Select
@@ -215,7 +211,6 @@ export default function PaymentsWrite({
             </Select>
           </FormControl>
 
-          {/* Notes multiline */}
           <TextField
             label="Notes"
             fullWidth

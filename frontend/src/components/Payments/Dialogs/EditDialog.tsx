@@ -21,7 +21,7 @@ const Transition = React.forwardRef<
   );
 });
 
-interface EditorDialogProps {
+interface EditDialogProps {
   currencySymbol: string,
   open: boolean;
   paymentId?: number;
@@ -39,7 +39,7 @@ export default function EditDialog({
   onClose,
   onSuccess,
   onError,
-}: EditorDialogProps) {
+}: EditDialogProps) {
   const isEdit = Boolean(initialData && initialData.id);
 
   return (

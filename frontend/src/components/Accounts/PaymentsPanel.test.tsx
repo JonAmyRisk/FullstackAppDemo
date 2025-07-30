@@ -25,24 +25,19 @@ describe('<PaymentsPanel />', () => {
       />
     );
 
-    // Header
     expect(
       screen.getByRole('heading', { name: `Payments for ${accountName}` })
     ).toBeInTheDocument();
 
-    // Close button (aria-label must match)
     const closeBtn = screen.getByLabelText('Close payments panel');
     expect(closeBtn).toBeInTheDocument();
     fireEvent.click(closeBtn);
     expect(onClose).toHaveBeenCalled();
 
-    // Payment entries
     payments.forEach((p) => {
-      // Primary text
       const primary = `${currencySymbol}${p.amount.toFixed(2)} to ${p.recipientName}`;
       expect(screen.getByText(primary)).toBeInTheDocument();
 
-      // Secondary text should use status lookup and notes
       const statusLabel = PAYMENT_STATUS[p.status];
       const notesPart = p.notes ? ` | ${p.notes}` : '';
       expect(
@@ -66,7 +61,6 @@ describe('<PaymentsPanel />', () => {
     ).toBeInTheDocument();
     expect(screen.getByText(accountName)).toBeInTheDocument();
 
-    // Close button still present
     const closeBtn = screen.getByLabelText('Close payments panel');
     fireEvent.click(closeBtn);
     expect(onClose).toHaveBeenCalled();

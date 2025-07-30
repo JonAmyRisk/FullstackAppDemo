@@ -7,7 +7,6 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     define: {
-      // At build-time, Vite will replace __BASE_URL__ with the actual string
       __BASE_URL__: JSON.stringify(env.VITE_BASE_URL),
     },
   }

@@ -9,7 +9,6 @@ describe('PaymentsService', () => {
   let prisma: { payment: Record<string, MockFn> };
 
   beforeEach(async () => {
-    // create a fake PrismaService with jest.fn() for each method we use
     prisma = {
       payment: {
         findUnique: jest.fn(),
@@ -89,8 +88,6 @@ describe('PaymentsService', () => {
 
         await service.createPayment(input);
 
-        // Instead of exact matching the whole object,
-        // just assert that `data` contains the properties you expect:
         expect(prisma.payment.create).toHaveBeenCalledWith(
             expect.objectContaining({
             data: expect.objectContaining({

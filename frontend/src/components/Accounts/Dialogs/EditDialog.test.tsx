@@ -2,7 +2,6 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import EditDialog from './EditDialog';
 
 jest.mock('../AccountsWrite', () => (props: any) => {
-  // Render a dummy button that simulates success when clicked
   return (
     <button
       data-testid="mock-accounts-write"
@@ -42,11 +41,9 @@ describe('<EditDialog />', () => {
 
   it('when AccountsWrite signals success, calls onSuccess then onClose', () => {
     render(<EditDialog {...defaultProps} />);
-    // our mock writes out a button labeled "Mock Write"
+    
     fireEvent.click(screen.getByTestId('mock-accounts-write'));
-    // should have called onSuccess first...
     expect(defaultProps.onSuccess).toHaveBeenCalledTimes(1);
-    // ...and then onClose
     expect(defaultProps.onClose).toHaveBeenCalledTimes(1);
   });
 });

@@ -35,7 +35,6 @@ describe('AppController (unit)', () => {
   });
 
   afterEach(() => {
-    // reset all mocks between tests
     Object.values(mockAccounts).forEach(m => m.mockReset());
     Object.values(mockPayments).forEach(m => m.mockReset());
   });
