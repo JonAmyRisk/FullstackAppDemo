@@ -21,6 +21,7 @@ interface AccountsWriteProps {
   accountId?: number;
   initialData?: AccountInput;
   onSuccess?: () => void;
+  onError?: (msg: string) => void;
 }
 
 const validationSchema = Yup.object({
@@ -40,6 +41,7 @@ export default function AccountsWrite({
   accountId,
   initialData,
   onSuccess,
+  onError,
 }: AccountsWriteProps) {
   const isEdit = Boolean(accountId);
 
@@ -66,6 +68,8 @@ export default function AccountsWrite({
     } catch (error) {
       console.error(error);
       setStatus({ error: `Failed to ${isEdit ? 'update' : 'register'} account` });
+      const msg = isEdit ? 'Failed to update account' : 'Failed to register account';
+      onError?.(msg);
     } finally {
       setSubmitting(false);
     }

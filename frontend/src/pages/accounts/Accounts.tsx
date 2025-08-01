@@ -1,9 +1,15 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
+import MuiAlert, { type AlertProps } from '@mui/material/Alert';
 import AccountsList from '../../components/Accounts/AccountsList';
 import PaymentsPanel from '../../components/Accounts/PaymentsPanel';
 import EditDialog from '../../components/Accounts/Dialogs/EditDialog';
+import Snackbar from '@mui/material/Snackbar';
 import { BASE_URL } from '../../utils/constants'
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref) {
+  return <MuiAlert elevation={6} variant="filled" ref={ref} {...props} />;
+});
 
 export default function Accounts() {
   const [refreshKey, setRefreshKey] = useState(0);
@@ -11,7 +17,21 @@ export default function Accounts() {
   const [writeOpen, setWriteOpen] = useState(false);
   
   const [selectedAccount, setSelectedAccount] = useState<any>(null);
-  const [payments, setPayments] = useState<any[]>([]);
+  const [payments, setPayments] = useState<any[]>([]);  
+    
+  const [snack, setSnack] = useState<{
+    open: boolean;
+    message: string;
+    severity: 'success' | 'error' | 'info' | 'warning';
+  }>({ open: false, message: '', severity: 'info' });
+  
+  const showSnack = (message: string, severity: typeof snack.severity) => {
+    setSnack({ open: true, message, severity });
+  };
+  const closeSnack = () => {
+    setSnack((s) => ({ ...s, open: false }));
+  };
+
 
   const handleAccountsChanged = () => setRefreshKey((k) => k + 1);
   const handleNew = () => { setEditingAccount(null); setWriteOpen(true); };
@@ -25,6 +45,7 @@ export default function Accounts() {
   };
 
   return (
+  <>
     <Box sx={{ display: 'flex', height: '100%' }}>
       <AccountsList 
         refreshKey={refreshKey}
@@ -43,10 +64,15 @@ export default function Accounts() {
         open={writeOpen}
         accountId={editingAccount?.id}
         initialData={editingAccount}
+        onError={(msg) => {showSnack(msg, 'error')}}
         onClose={() => setWriteOpen(false)}
         onSuccess={() => {
           setWriteOpen(false);
           handleAccountsChanged();
+          showSnack(
+            selectedAccount ? 'Account updated' : 'New account registered',
+            'success'
+          );
         }}
       />
       {/* Deletion is a core part of CRUD but not in requirements and question on what to do with linked payments
@@ -58,6 +84,17 @@ export default function Accounts() {
         onConfirm={confirmDelete}
       />*/}
     </Box>
+    <Snackbar
+      open={snack.open}
+      autoHideDuration={3000}
+      onClose={closeSnack}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+    >
+      <Alert onClose={closeSnack} severity={snack.severity}>
+        {snack.message}
+      </Alert>
+    </Snackbar>
+  </>
   );
 }
 

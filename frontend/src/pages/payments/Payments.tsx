@@ -4,6 +4,7 @@ import MuiAlert, { type AlertProps } from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import PaymentsList from '../../components/Payments/PaymentsList';
 import EditDialog from '../../components/Payments/Dialogs/EditDialog';
+import PaymentInfoPanel from '../../components/Payments/PaymentInfoPanel';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref) {
   return <MuiAlert elevation={6} variant="filled" ref={ref} {...props} />;
@@ -38,6 +39,7 @@ export default function Payments() {
  
   const selectPayment = async (payment: any) => {
     setSelectedPayment(payment);
+    console.log("selected payment is", selectedPayment)
   };
 
   return (
@@ -51,6 +53,11 @@ export default function Payments() {
           onNew={handleNew}
           onEdit={handleEdit}
         />
+        {selectedPayment && <PaymentInfoPanel
+          currencySymbol='£'
+          selectedPayment={selectedPayment}
+          onClose={() => setSelectedPayment(null)}
+        />}
         <EditDialog
           currencySymbol={currencySymbol}
           open={writeOpen}

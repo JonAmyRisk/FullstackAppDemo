@@ -27,6 +27,7 @@ interface AccountEditorDialogProps {
   initialData?: AccountInput;
   onClose: () => void;
   onSuccess: () => void;
+  onError?: (msg: string) => void;
 }
 
 export default function EditDialog({
@@ -35,6 +36,7 @@ export default function EditDialog({
   initialData,
   onClose,
   onSuccess,
+  onError,
 }: AccountEditorDialogProps) {
   const isEdit = Boolean(accountId);
 
@@ -53,6 +55,7 @@ export default function EditDialog({
         <AccountsWrite
           accountId={accountId}
           initialData={initialData}
+          onError={onError}
           onSuccess={() => {
             onSuccess();
             onClose();
